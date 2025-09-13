@@ -44,7 +44,7 @@ const Navbar = () => {
       </ul>
 
       <div>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200">
+        <button className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors duration-200">
           Create Account
         </button>
       </div>
