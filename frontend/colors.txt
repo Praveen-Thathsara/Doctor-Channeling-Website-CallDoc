@@ -1,0 +1,3 @@
+light background - #00A4A620
+primary #00A4A6
+background #00A4A640
