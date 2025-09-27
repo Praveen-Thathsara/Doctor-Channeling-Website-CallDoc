@@ -48,7 +48,12 @@ const doctorData = {
 }
 
         const newDoctor = new doctorModel(doctorData)
+        await newDoctor.save()
+
+        res.json({ success: true, message: "Doctor added successfully" })
     } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: "Error while adding doctor", error: error.message })
 
     }
 }
