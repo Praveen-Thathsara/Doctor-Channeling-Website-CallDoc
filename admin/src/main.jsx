@@ -6,15 +6,16 @@ import { BrowserRouter } from 'react-router-dom'
 import { AdminContext } from './context/AdminContext.jsx'
 import { DoctorContext } from './context/DoctorContext.jsx'
 import AppContextProvider from './context/AppContext.jsx'
+import AdminContextProvider from './context/AdminContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <AdminContext.Provider>
+    <AdminContextProvider>
       <DoctorContext.Provider>
         <AppContextProvider>
           <App />
         </AppContextProvider>
       </DoctorContext.Provider>
-    </AdminContext.Provider>
+    </AdminContextProvider>
   </BrowserRouter>,
 )
