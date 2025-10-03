@@ -7,6 +7,10 @@ import { AdminContext } from './context/AdminContext'
 import Navbar from './components/Navbar.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import { Routes, Route } from 'react-router-dom';
+import Dashboard from './pages/Admin/Dashboard.jsx';
+import AllaAppointments from './pages/Admin/AllAppointments.jsx';
+import DoctorsList from './pages/Admin/DoctorsList.jsx';
+import AddDoctor from './pages/Admin/AddDoctor.jsx';
 
 
 const App = () => {
