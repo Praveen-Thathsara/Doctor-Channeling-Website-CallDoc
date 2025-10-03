@@ -5,6 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useContext } from 'react'
 import { AdminContext } from './context/AdminContext'
 import Navbar from './components/Navbar.jsx';
+import Sidebar from './components/Sidebar.jsx';
+import { Routes, Route } from 'react-router-dom';
 
 
 const App = () => {
@@ -15,6 +17,17 @@ const App = () => {
     <div className='bg-[#F8F9FD]'>
       <ToastContainer />
       <Navbar />
+      <div className='flex items-start'>
+        <Sidebar />
+        <Routes>
+          <Route path='/' element={<></>} />
+          <Route path='/admin-dashboard' element={<Dashboard />} />
+          <Route path='/all-appointments' element={<AllaAppointments />} />
+          <Route path='/doctors-list' element={<DoctorsList />} />
+          <Route path='/add-doctor' element={<AddDoctor />} />
+        </Routes>
+
+      </div>
     </div>
   ) : (
     <>
