@@ -87,7 +87,7 @@ const updateProfile = async (req, res) => {
   try {
     const userId = req.user.userId  // ✅ from middleware
     const { name, phone, address, dob, gender } = req.body
-    const imageFile = req.File
+    const imageFile = req.file
 
     if (!name || !phone || !dob || !gender) {
       return res.json({ success: false, message: "Data Missing" })
