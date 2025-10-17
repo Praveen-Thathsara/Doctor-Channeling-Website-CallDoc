@@ -43,11 +43,11 @@ const AppContextProvider = (props) => {
     }
 
     const value = {
-        doctors,
+        doctors,getDoctorsData,
         currencySymbol,
         token, setToken,
         backendUrl,
-        userData,setUserData,
+        userData, setUserData,
         loadUserProfileData
 
     }
@@ -60,7 +60,7 @@ const AppContextProvider = (props) => {
         if (token) {
             loadUserProfileData()
 
-        }else{
+        } else {
             setUserData(false)
         }
     }, [token])
