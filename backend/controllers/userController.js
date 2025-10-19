@@ -215,11 +215,16 @@ const cancelAppointment = async (req, res) => {
     }
 }
 
-// API to make payment of appointment using razorpay
+// const razorpayInstance = new razorpay({
+//     key_id:'',
+//     key_secret:''
+// })
 
-const paymentRazorpay = async (req, res) => {
+// // API to make payment of appointment using razorpay
 
-}
+// const paymentRazorpay = async (req, res) => {
+
+// }
 
 
 
