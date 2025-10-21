@@ -2,16 +2,18 @@ import React from 'react'
 import { useContext } from 'react'
 import { AdminContext } from '../../context/AdminContext'
 import { useEffect } from 'react'
+import { AppContext } from '../../context/AppContext'
 
 const AllAppointments = () => {
 
-const {aToken, appointments, getAllAppointments} = useContext(AdminContext)
+  const { aToken, appointments, getAllAppointments } = useContext(AdminContext)
+  const { calculateAge } = useContext(AppContext)
 
-useEffect(()=>{
-  if (aToken) {
-    getAllAppointments()
-  }
-},[aToken])
+  useEffect(() => {
+    if (aToken) {
+      getAllAppointments()
+    }
+  }, [aToken])
 
   return (
     <div className='w-full max-w-6xl m-5'>
@@ -27,12 +29,13 @@ useEffect(()=>{
           <p>Action</p>
         </div>
 
-        {appointments.map((item, index)=> (
-          <div className='flex flex-wrap justify-between max-sm:gap-2 sm:grid sm:grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr_1fr] items-center text-gray-500 py-3 px-6 border-b hover:bg-gray-50' key = {index}>
+        {appointments.map((item, index) => (
+          <div className='flex flex-wrap justify-between max-sm:gap-2 sm:grid sm:grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr_1fr] items-center text-gray-500 py-3 px-6 border-b hover:bg-gray-50' key={index}>
             <p className='max-sm:hidden'>{index + 1}</p>
             <div className='flex items-center gap-2'>
               <img className='w-8 rounded-full' src={item.userData.image} alt="" /> <p>{item.userData.name}</p>
             </div>
+            <p>{calculateAge(item.userData.dob)}</p>
           </div>
         ))}
       </div>

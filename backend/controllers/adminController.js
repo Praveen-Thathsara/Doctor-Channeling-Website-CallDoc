@@ -79,13 +79,13 @@ const loginAdmin = async (req, res) => {
 }
 
 //API to get all doctors list for admin panel
-const alldoctors = async (req,res) => {
+const alldoctors = async (req, res) => {
     try {
         const doctors = await doctorModel.find({}).select('-password')
-        res.json({success:true,doctors})
+        res.json({ success: true, doctors })
     } catch (error) {
         console.log(error)
-        res.json({success:false,message:error.message})
+        res.json({ success: false, message: error.message })
     }
 }
 
@@ -94,10 +94,10 @@ const alldoctors = async (req,res) => {
 const appointmentAdmin = async (req, res) => {
     try {
         const appointments = await appointmentModel.find({})
-        res.json({success: true, appointments})
+        res.json({ success: true, appointments })
     } catch (error) {
         console.log(error)
-        res.json({success:false,message:error.message})
+        res.json({ success: false, message: error.message })
     }
 }
 
