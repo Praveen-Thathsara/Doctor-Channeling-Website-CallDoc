@@ -1,6 +1,8 @@
 import React from 'react'
 import { useContext, useEffect } from 'react'
 import { DoctorContext } from '../../context/DoctorContext.jsx';
+import { AppContext } from '../../context/AppContext.jsx';
+import { assets } from '../../assets/assets.js';
 
 
 
@@ -9,6 +11,7 @@ const DoctorAppointments = () => {
 
   const { dToken, getAppointments, appointments } = useContext(DoctorContext);
 
+  const {calculateAge, slotDateFormat, currency} = useContext(AppContext)
 useEffect(() => {
   if (dToken) {
     getAppointments();
@@ -28,6 +31,29 @@ useEffect(() => {
           <p>Fees</p>
           <p>Action</p>
         </div>
+
+        {
+          appointments.map((item,index)=>(
+            <div className='' key={index}>
+              <p>{index+1}</p>
+              <div>
+                <img src={item.userData.image} alt="" /> <p>{item.userData.name}</p>
+              </div>
+              <div>
+                <p>
+                  {item.payment ? 'Online' : 'CASH'}
+                </p>
+              </div>
+              <p>{calculateAge(item.userData.dob)}</p>
+              <p>{slotDateFormat(item.slotDate)}, {item.slotTime}</p>
+              <p>{currency}{item.amount}</p>
+              <div>
+                <img src={assets.cancel_icon} alt="" />
+                <img src={assets.tick_icon} alt="" />
+              </div>
+            </div>
+          ))
+        }
 
       </div>
     </div>
