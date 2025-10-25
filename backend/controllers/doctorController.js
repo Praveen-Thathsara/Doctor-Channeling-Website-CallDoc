@@ -61,8 +61,8 @@ const loginDoctor = async (req, res) => {
 const appointmentsDoctor = async (req, res) => {
     try {
         const { docId } = req.doctor
-        const appointments = await appointmentModel.find({docId})
-        res.json({ success: true, appointments})
+        const appointments = await appointmentModel.find({ docId })
+        res.json({ success: true, appointments })
 
     } catch (error) {
         console.log(error)
@@ -72,17 +72,17 @@ const appointmentsDoctor = async (req, res) => {
 
 // API to mark appointment completed for doctor panel
 
-const appointmentComplete = async (req, res)=> {
+const appointmentComplete = async (req, res) => {
     try {
-        
-        const {docId, appointmentId} = req.body
+
+        const { docId, appointmentId } = req.body
         const appointmentData = appointmentModel.findById(appointmentId)
 
         if (appointmentData && appointmentData.docId === docId) {
-            await appointmentModel.findByIdAndUpdate(appointmentId, {isCompleted: true})
-            res.json({ success: true, message: 'Appointment marked as completed'})
-        }else{
-            res.json({ success: false, message: 'Appointment not found or unauthorized'})
+            await appointmentModel.findByIdAndUpdate(appointmentId, { isCompleted: true })
+            res.json({ success: true, message: 'Appointment marked as completed' })
+        } else {
+            res.json({ success: false, message: 'Appointment not found or unauthorized' })
         }
 
 
@@ -95,17 +95,17 @@ const appointmentComplete = async (req, res)=> {
 
 // API to cancel appointment completed for doctor panel
 
-const appointmentCancel = async (req, res)=> {
+const appointmentCancel = async (req, res) => {
     try {
-        
-        const {docId, appointmentId} = req.body
+
+        const { docId, appointmentId } = req.body
         const appointmentData = appointmentModel.findById(appointmentId)
 
         if (appointmentData && appointmentData.docId === docId) {
-            await appointmentModel.findByIdAndUpdate(appointmentId, {cancelled: true})
-            res.json({ success: true, message: 'Appointment canselled'})
-        }else{
-            res.json({ success: false, message: 'Cancellation Failed'})
+            await appointmentModel.findByIdAndUpdate(appointmentId, { cancelled: true })
+            res.json({ success: true, message: 'Appointment canselled' })
+        } else {
+            res.json({ success: false, message: 'Cancellation Failed' })
         }
 
 
@@ -116,4 +116,37 @@ const appointmentCancel = async (req, res)=> {
     }
 }
 
-export { changeAvailability, doctorList, loginDoctor, appointmentsDoctor, appointmentCancel, appointmentComplete }
+//API to get dashboard data for doctor panel
+
+const doctorDashboard = async (req, res) => {
+    try {
+        const { docId } = req.doctor
+        const appointments = await appointmentModel.find({ docId })
+        let earnings = 0
+        appointments.map((item) => {
+            if (item.isCompleted || item.payment) {
+                earnings += item.amount
+            }
+        })
+
+        let patients = []
+        appointments.map((item) => {
+            if (!patients.includes(item.userId)) {
+                patients.push(item.userId)
+            }
+        })
+
+        const dashData = {
+            earnings,
+            totalAppointments: appointments.length,
+            patients: patients.length,
+            latestAppointments: appointments.reverse().slice(0, 5)
+        }
+        res.json({ success: true, dashData })
+    } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: error.message })
+    }
+}
+
+export { changeAvailability, doctorList, loginDoctor, appointmentsDoctor, appointmentCancel, appointmentComplete, doctorDashboard}
